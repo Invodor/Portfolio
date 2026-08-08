@@ -73,11 +73,7 @@ body {
 
     padding: 120px 20px 60px;
 
-    background:
-        radial-gradient(
-            circle at top right,
-            rgba(56, 189, 248, 0.12),
-            transparent 35%
+    background:#000000
         );
 }
 
