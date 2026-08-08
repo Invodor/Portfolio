@@ -2,25 +2,32 @@
    TYPING ANIMATION
 ========================= */
 
-const text = "Aspiring Software Developer";
+const typingText = "Aspiring Software Developer";
 
-let index = 0;
+let typingIndex = 0;
 
 const typingElement = document.getElementById("typing");
 
-function typeText() {
+function typeWriter() {
 
-    if (index < text.length) {
+    if (typingIndex < typingText.length) {
 
-        typingElement.textContent += text.charAt(index);
+        typingElement.textContent += typingText.charAt(typingIndex);
 
-        index++;
+        typingIndex++;
 
-        setTimeout(typeText, 80);
+        setTimeout(typeWriter, 80);
+
     }
+
 }
 
-typeText();
+
+/* Start typing animation */
+
+if (typingElement) {
+    typeWriter();
+}
 
 
 /* =========================
@@ -58,38 +65,44 @@ navigationLinks.forEach(function(link) {
 
 const topButton = document.getElementById("topBtn");
 
-window.addEventListener("scroll", function() {
 
-    if (window.scrollY > 400) {
+if (topButton) {
 
-        topButton.style.display = "block";
+    window.addEventListener("scroll", function() {
 
-    } else {
+        if (window.scrollY > 400) {
 
-        topButton.style.display = "none";
+            topButton.style.display = "block";
 
-    }
+        } else {
 
-});
+            topButton.style.display = "none";
 
+        }
 
-topButton.addEventListener("click", function() {
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
     });
 
-});
+
+    topButton.addEventListener("click", function() {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+}
 
 
 /* =========================
-   SECTION REVEAL ANIMATION
+   SCROLL REVEAL ANIMATION
 ========================= */
 
 const sections = document.querySelectorAll(".section");
 
-const observer = new IntersectionObserver(
+
+const sectionObserver = new IntersectionObserver(
 
     function(entries) {
 
@@ -97,9 +110,9 @@ const observer = new IntersectionObserver(
 
             if (entry.isIntersecting) {
 
-                entry.target.style.opacity = "1";
+                entry.target.classList.add("show");
 
-                entry.target.style.transform = "translateY(0)";
+                sectionObserver.unobserve(entry.target);
 
             }
 
@@ -116,12 +129,66 @@ const observer = new IntersectionObserver(
 
 sections.forEach(function(section) {
 
-    section.style.opacity = "0";
-
-    section.style.transform = "translateY(40px)";
-
-    section.style.transition = "opacity 0.8s ease, transform 0.8s ease";
-
-    observer.observe(section);
+    sectionObserver.observe(section);
 
 });
+
+
+/* =========================
+   PROJECT CARD INTERACTION
+========================= */
+
+const projectCards = document.querySelectorAll(".card");
+
+
+projectCards.forEach(function(card) {
+
+    card.addEventListener("mouseenter", function() {
+
+        this.style.transform = "translateY(-10px)";
+
+    });
+
+
+    card.addEventListener("mouseleave", function() {
+
+        this.style.transform = "translateY(0)";
+
+    });
+
+});
+
+
+/* =========================
+   PHOTO INTERACTION
+========================= */
+
+const profileImage = document.querySelector(".profile-image");
+
+
+if (profileImage) {
+
+    profileImage.addEventListener("click", function() {
+
+        this.classList.toggle("photo-active");
+
+    });
+
+}
+
+
+/* =========================
+   CURRENT YEAR
+========================= */
+
+const footerText = document.querySelector("footer p");
+
+
+if (footerText) {
+
+    const currentYear = new Date().getFullYear();
+
+    footerText.innerHTML =
+        `© ${currentYear} Ishaan Bijith. All rights reserved.`;
+
+}
