@@ -46,7 +46,7 @@ body {
 }
 
 .navbar a {
-    color: #f8fafc;
+    color: #2b2b2b;
 
     text-decoration: none;
 
@@ -269,7 +269,7 @@ body {
 }
 
 #skills li {
-    background: #1e293b;
+    background: #2b2b2b;
 
     padding: 12px 20px;
 
@@ -299,7 +299,7 @@ body {
 ================================================== */
 
 .card {
-    background: #1e293b;
+    background: #2b2b2b;
 
     padding: 25px;
 
@@ -541,7 +541,7 @@ footer {
 .education-card {
     max-width: 850px;
 
-    background: #1e293b;
+    background: #2b2b2b;
 
     padding: 30px;
 
@@ -618,7 +618,7 @@ footer {
 }
 
 .certification-card {
-    background: #1e293b;
+    background: #2b2b2b;
 
     padding: 30px;
 
