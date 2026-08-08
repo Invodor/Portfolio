@@ -1,40 +1,127 @@
-// Smooth scrolling
-document.querySelectorAll("nav a").forEach(anchor => {
-    anchor.addEventListener("click", function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute("href"))
-            .scrollIntoView({ behavior: "smooth" });
-    });
-});
+/* =========================
+   TYPING ANIMATION
+========================= */
 
-// Typing effect
 const text = "Aspiring Software Developer";
-let i = 0;
-const title = document.getElementById("typing");
 
-function typeWriter() {
-    if (i < text.length) {
-        title.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 100);
+let index = 0;
+
+const typingElement = document.getElementById("typing");
+
+function typeText() {
+
+    if (index < text.length) {
+
+        typingElement.textContent += text.charAt(index);
+
+        index++;
+
+        setTimeout(typeText, 80);
     }
 }
-window.onload = typeWriter;
 
-// Dark mode
-const toggle = document.getElementById("theme-toggle");
-toggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
+typeText();
+
+
+/* =========================
+   SMOOTH NAVIGATION
+========================= */
+
+const navigationLinks = document.querySelectorAll(".navbar a");
+
+navigationLinks.forEach(function(link) {
+
+    link.addEventListener("click", function(event) {
+
+        event.preventDefault();
+
+        const targetId = this.getAttribute("href");
+
+        const targetSection = document.querySelector(targetId);
+
+        if (targetSection) {
+
+            targetSection.scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+    });
+
 });
 
-// Back to top button
-const topBtn = document.getElementById("topBtn");
 
-window.onscroll = function () {
-    topBtn.style.display =
-        document.documentElement.scrollTop > 200 ? "block" : "none";
-};
+/* =========================
+   BACK TO TOP BUTTON
+========================= */
 
-topBtn.onclick = function () {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-};
+const topButton = document.getElementById("topBtn");
+
+window.addEventListener("scroll", function() {
+
+    if (window.scrollY > 400) {
+
+        topButton.style.display = "block";
+
+    } else {
+
+        topButton.style.display = "none";
+
+    }
+
+});
+
+
+topButton.addEventListener("click", function() {
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+});
+
+
+/* =========================
+   SECTION REVEAL ANIMATION
+========================= */
+
+const sections = document.querySelectorAll(".section");
+
+const observer = new IntersectionObserver(
+
+    function(entries) {
+
+        entries.forEach(function(entry) {
+
+            if (entry.isIntersecting) {
+
+                entry.target.style.opacity = "1";
+
+                entry.target.style.transform = "translateY(0)";
+
+            }
+
+        });
+
+    },
+
+    {
+        threshold: 0.15
+    }
+
+);
+
+
+sections.forEach(function(section) {
+
+    section.style.opacity = "0";
+
+    section.style.transform = "translateY(40px)";
+
+    section.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+
+    observer.observe(section);
+
+});
